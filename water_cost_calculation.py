@@ -46,7 +46,7 @@ def calculate_water_usage(work_book, work_sheet_names, row_num):
     # 戻り値
     return water_usage_per_two_month
 
-    def calculate_sum_water_fee(work_book, work_sheet_names, water_usage_list):
+def calculate_sum_water_fee(work_book, work_sheet_names, water_usage_list):
     """
     2か月ごとの水道料金を取得
     """
@@ -117,7 +117,7 @@ def main():
             # 水道使用量計算
             water_usage_list = calculate_water_usage(work_book, work_sheet_names, row_num)
             # 水道使用料計算
-                water_fee_list = calculate_sum_water_fee(work_book, work_sheet_names, water_usage_list)
+            water_fee_list = calculate_sum_water_fee(work_book, work_sheet_names, water_usage_list)
             # 水道使用量・水道料金明細ファイル作成
             water_charge_statement_create(work_book,
                                           work_sheet_names,
