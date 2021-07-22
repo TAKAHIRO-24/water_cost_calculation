@@ -1,5 +1,4 @@
 import os
-from tkinter import messagebox
 
 import openpyxl
 
@@ -127,7 +126,7 @@ def main():
             # 帳票印刷
             report_print()
     except:
-        messagebox.showerror('エラー', '処理が中止されました。')
+        assert False, '処理が中止されました。'
     finally:
         work_book.close
 
