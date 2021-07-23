@@ -77,11 +77,13 @@ def water_charge_statement_create(work_book,
     # 氏名取得
     room_owner = work_sheet1.cell(row=row_num,column=2).value
     # 帳票作成
-    work_sheet3.cell(row=5,column=2).value = str(room_num) + '号'
-    work_sheet3.cell(row=5,column=3).value = str(room_owner) + '様' 
+    work_sheet3.cell(row=5,column=2).value = str(room_num)
+    work_sheet3.cell(row=5,column=4).value = str(room_owner) + '様' 
     for i in range(6):
         work_sheet3.cell(row=10+i,column=4).value = water_usage_list[i]
         work_sheet3.cell(row=10+i,column=5).value = water_fee_list[i]
+    # 返金額
+    work_sheet3.cell(row=26,column=6).value = work_sheet3.cell(row=22,column=6).value + '円'
     # 名前を付けて保存
     work_book.save(f'{work_sheet_names[0]}/{room_owner}.xlsx')
 
