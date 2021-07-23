@@ -77,35 +77,30 @@ def water_charge_statement_create(work_book,
     # 氏名取得
     room_owner = work_sheet1.cell(row=row_num,column=2).value
     # 帳票作成
-    work_sheet3.cell(row=5,column=2).value = str(room_num) + '号'
-    work_sheet3.cell(row=5,column=3).value = str(room_owner) + '様' 
-    work_sheet3.cell(row=7,column=4).value =  work_sheet_names[0]
+    work_sheet3.cell(row=5,column=2).value = room_num
+    work_sheet3.cell(row=5,column=4).value = str(room_owner) + '様' 
+    work_sheet3.cell(row=7,column=5).value =  work_sheet_names[0]
     sum_price = 0
-    sum_minus_price = 0
     for i in range(6):
-        work_sheet3.cell(row=10+i,column=3).value = water_usage_list[i]
-        work_sheet3.cell(row=10+i,column=4).value = water_fee_list[i]
-        # 差引額
-        work_sheet3.cell(row=10+i,column=6).value = water_fee_list[i] - int(work_sheet3.cell(row=10+i,column=5).value)
+        work_sheet3.cell(row=10+i,column=5).value = water_usage_list[i]
+        work_sheet3.cell(row=10+i,column=6).value = water_fee_list[i]
         # 合計水道料金保存
         sum_price = sum_price + water_fee_list[i]
-        # 合計差引額保存
-        sum_minus_price = sum_minus_price + int(work_sheet3.cell(row=10+i,column=6).value)
     # 差額
-    price_diff = sum_minus_price - int(work_sheet3.cell(row=22,column=3).value)
+    price_diff = sum_price - int(work_sheet3.cell(row=22,column=4).value)
     if price_diff > 0:
-        work_sheet3.cell(row=22,column=5).value = '▲' + "{:,}".format(price_diff)
+        work_sheet3.cell(row=22,column=6).value = '▲' + "{:,}".format(price_diff)
     elif price_diff == 0:
-        work_sheet3.cell(row=22,column=5).value = '0'
+        work_sheet3.cell(row=22,column=6).value = '0'
     elif price_diff < 0:
-        work_sheet3.cell(row=22,column=5).value = "{:,}".format(abs(price_diff))
+        work_sheet3.cell(row=22,column=6).value = "{:,}".format(abs(price_diff))
     # 請求額・返金額
     if price_diff >= 0:
-        work_sheet3.cell(row=26,column=4).value = '請求額'
-        work_sheet3.cell(row=26,column=5).value = price_diff
+        work_sheet3.cell(row=26,column=5).value = '請求額'
+        work_sheet3.cell(row=26,column=6).value = price_diff
     elif price_diff < 0:
-        work_sheet3.cell(row=26,column=4).value = '返金額'
-        work_sheet3.cell(row=26,column=5).value = abs(price_diff)
+        work_sheet3.cell(row=26,column=5).value = '返金額'
+        work_sheet3.cell(row=26,column=6).value = abs(price_diff)
     # 名前を付けて保存
     work_book.save(f'{work_sheet_names[0]}/{room_num} {room_owner}.xlsx')
 
